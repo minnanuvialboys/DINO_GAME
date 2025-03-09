@@ -1,0 +1,23 @@
+Code: 
+#include <Servo.h>
+
+#define threshold 100                                                                                                                                  // Try 250, 260, or 300
+#define unpress_angle 0     
+#define press_angle 15                                                                                                                                     
+                                                                                                       
+Servo myservo;  // Create servo object
+
+void setup() {          
+  myservo.attach(9);  // Attach the servo to pin 9
+  myservo.write(unpress_angle);   
+}
+
+void loop() {
+  myservo.write(unpress_angle); // Reset servo to unpress position
+  delay(1);
+
+  if (analogRead(A0) < threshold) {
+    myservo.write(press_angle);  // Press the button
+    delay(100);                  // Hold for 100ms
+  }
+}
